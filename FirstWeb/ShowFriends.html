@@ -1,0 +1,32 @@
+﻿<body ng-app="Friends">
+    <h1>Product List</h1>
+    <div ng-controller="FriendController">
+        <table ng-repeat="friend in friends" border="1">
+            <tr>
+                <td>{{friend.ID}}</td>
+                <td>{{friend.Name}}</td>
+                <td>{{friend.Age}}</td>
+                <td>{{friend.Occupation}}</td>
+                <td>{{friend.Company}}</td>
+                <td>{{friend.Reference}}</td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+<script>
+    var app = angular.module("Friends", []);
+    app.controller("FriendController", function ($scope, $http) {
+        $http.get('http://localhost:1110/api/product').
+          success(function (data, status, headers, config) {
+              $scope.friends = data;
+
+          }).
+          error(function (data, status, headers, config) {
+              alert("error");
+          });
+    });
+</script>

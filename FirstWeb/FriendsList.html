@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html ng-app="Friends">
+<head>
+    <title>Make Friend</title>
+    <script src="https://ajaxhttps://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script>
+        
+    </script>
+</head>
+<body>
+    <script>
+        angular.module('Friends', [])
+        .controller('AddFriendsController', ['$scope', '$http', function ($scope, $http) {
+            $scope.submit = function () {
+                if ($scope.Name) {
+                    var friend = {
+                        "Name": $scope.Name,
+                        "Age": $scope.Age,
+                        "Occupation": $scope.Occupation,
+                        "Company": $scope.Company,
+                        "Reference": $scope.Reference
+                    }
+                    $http.post('', friend).
+                        success(function (data, status, headers, config) {
+                            alert('Got a new friend');
+                        }).
+                    error(function (data, status, headers, config) {
+                        alert('errors');
+                    });
+                }
+            };
+        }]);
+       
+    </script>
+    <h2>Make More Friends</h2>
+    <form ng-submit="submit()" ng-controller="AddFriendsController">
+        <div>Name: <input type="text" ng-model="Name" required/></div><br />
+        <div>Age: <input type="number" ng-model="Age"/></div><br />
+        <div>Occupation: <input type="text" ng-model="Occupation"/></div><br />
+        <div>Company: <input type="text" ng-model="Company"/></div><br />
+        <div>Reference: <input type="text" ng-model="Reference"/></div><br />
+        <div><input type="submit" id="MakeFriends" value="AddFriend"/></div><br />
+    </form>
+</body>
+</html>
